@@ -3,24 +3,17 @@
 ##############################################
 #  Install wp in current directory           #
 #   *Set up wordpress, and if you want a db  #
-#   *Installs riiskit                        #
+#   *Installs riiskit + child                #
 #   *User chooses what plugins to install    #
 ##############################################
 # author halvard@mekom.no
 
+#Add key to acf pro if you want it at the bottom of the file
+
 ### Prerequisits ####
 # YOU NEED TO HAVE WP-CLI INSTALLED
 # YOU NEED TO HAVE THE MYSQL IN PATH ROUTED TO THE ONE YOU USE
-#
-# Something like this:
-# mysql() {
-#     /Applications/MAMP/Library/bin/mysql "$@"
-# }
-# mysqladmin() {
-#     /Applications/MAMP/Library/bin/mysqladmin "$@"
-# }
-# export -f mysql
-# export -f mysqladmin
+
 
 #TODO:
 #
@@ -181,7 +174,9 @@ echo "#####################"
 
 #Get riiskit
 echo ">>>>Riiskitting the wp install"
-echo `wp theme install https://github.com/Chrisriis/riiskit/archive/master.zip --activate`
+echo `wp theme install https://github.com/Chrisriis/riiskit/archive/master.zip`
+echo ">>>>Childing the riiskit install"
+echo `wp theme install https://github.com/Chrisriis/riiskit-child/archive/master.zip --activate`
 
 
 #####################
@@ -247,7 +242,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 echo `wp plugin install https://github.com/Yoast/wordpress-seo/archive/trunk.zip --activate`
 fi
 
-echo ">>>>>WP Retina"F-4TV31278RN611611D
+echo ">>>>>WP Retina"
 read -p "WP Importer? (y/n)" -n 1 -r
 echo 
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -279,7 +274,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
     then
     echo "Installing and activating"
     # get acf zip file
-    echo `wget -O wp-content/plugins/acf-pro.zip "http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=b3JkZXJfaWQ9NDI2MjZ8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE0LTEwLTIyIDExOjA5OjE1"`
+    echo `wget -O wp-content/plugins/acf-pro.zip "http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=[your_key]"`
     # install & activate acf
     echo `wp plugin install wp-content/plugins/acf-pro.zip -–activate`
     # remove zip file
